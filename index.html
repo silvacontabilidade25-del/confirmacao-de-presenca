@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="pt-BR">
+<!DOCTYPE html>
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -35,32 +36,39 @@
 </head>
 <body>
   <h1>Confirmação de Presença</h1>
-  <p id="status">Verificando localização e horário...</p>  <form id="formPresenca" action="https://formsubmit.co/el/bimuje" method="POST">
+  <p id="status">Verificando localização e horário...</p>
+
+  <form id="formPresenca" action="https://formsubmit.co/el/bimuje" method="POST">
     <input type="hidden" name="_captcha" value="false">
-    <input type="hidden" name="_template" value="table"><label for="nome">Nome:</label>
-<input type="text" id="nome" name="Nome" required>
+    <input type="hidden" name="_template" value="table">
 
-<label for="tipo">Você é:</label>
-<select id="tipo" name="Tipo" required>
-  <option value="">Selecione</option>
-  <option value="Aluno">Aluno</option>
-  <option value="Visitante">Visitante</option>
-</select>
+    <label for="nome">Nome:</label>
+    <input type="text" id="nome" name="Nome" required>
 
-<div id="camposAluno" style="display: none;">
-  <label for="matricula">Matrícula:</label>
-  <input type="text" id="matricula" name="Matrícula">
+    <label for="tipo">Você é:</label>
+    <select id="tipo" name="Tipo" required>
+      <option value="">Selecione</option>
+      <option value="Aluno">Aluno</option>
+      <option value="Visitante">Visitante</option>
+    </select>
 
-  <label for="turma">Turma:</label>
-  <input type="text" id="turma" name="Turma">
-</div>
+    <div id="camposAluno" style="display: none;">
+      <label for="matricula">Matrícula:</label>
+      <input type="text" id="matricula" name="Matrícula">
 
-<button type="submit">Confirmar Presença</button>
+      <label for="turma">Turma:</label>
+      <input type="text" id="turma" name="Turma">
+    </div>
 
-  </form>  <p id="mensagemFinal">Seja bem-vindo, aproveite o evento.</p>  <script>
-    const destinoLat = -9.973961;
-    const destinoLon = -67.869306;
-    const raioPermitido = 100; // metros
+    <button type="submit">Confirmar Presença</button>
+  </form>
+
+  <p id="mensagemFinal">Seja bem-vindo, aproveite o evento.</p>
+
+  <script>
+    const destinoLat = -9.968477; // Aproximadamente Av. Tripole, 135
+    const destinoLon = -67.869188;
+    const raioPermitido = 200; // metros
 
     function getDistanceFromLatLonInMeters(lat1, lon1, lat2, lon2) {
       const R = 6371000;
@@ -124,19 +132,17 @@
       }
     }
 
-    // Mostra campos condicionais
     document.getElementById("tipo").addEventListener("change", function () {
       document.getElementById("camposAluno").style.display = this.value === "Aluno" ? 'block' : 'none';
     });
 
-    // Evento de envio do formulário
     document.getElementById("formPresenca").addEventListener("submit", function(e) {
       marcarPresencaHoje();
       document.getElementById("formPresenca").style.display = 'none';
       document.getElementById("mensagemFinal").style.display = 'block';
     });
 
-    // Inicia verificações ao carregar a página
     verificarTudo();
-  </script></body>
+  </script>
+</body>
 </html>
